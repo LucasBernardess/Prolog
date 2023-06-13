@@ -1,54 +1,29 @@
-% Letra A
-insereFinal([], Elemento, [Elemento]).
-% O caso base da recursao recebe uma lista vazia e insere o Elemento
-insereFinal([Cabeca|Cauda], Elemento, [Cabeca|Resto]) :-
-% Conserva a Cabeca da lista (primeiro elemento) e repete a operacao com a Cauda
-    insereFinal(Cauda, Elemento, Resto).
-    % Percorre a lista recursivamente ate que ela esteja completamente vazia, executando o caso base e reconstruindo a lista
+% Letra A - adicionar
+adicionaNoFinal(X, [], [X]). % Caso base: se a lista é vazia, L2 será [X]
+adicionaNoFinal(X, [Cab|Cau], [Cab|L2]) :-
+    adicionaNoFinal(X, Cau, L2). % Caso recursivo: mantém o primeiro elemento e adiciona X no final da cauda
 
+% Letra B - remover
+remover(1, [_|Cau], Cau). % Caso base: se a posição é 1, remove o primeiro elemento da lista
+remover(X, [Cab|Cau], [Cab|L2]) :-
+    X > 1, X1 is X - 1, remover(X1, Cau, L2). % Caso recursivo: mantém o primeiro elemento e remove da cauda
 
-%Letra B
-/* Para remover um elemento numa posicao informada pelo usuario eh necessario percorrer a lista ate chegar
-nessa posicao, separando a cabeca e a cauda da lista recursivamente. A cada chamada o indice eh subtraido em
-1 unidade ate que se iguale a 1 (momento em que o elemento a ser removido esta na cabeca da lista), apos isso
-o elemento que se localizava na cauda eh substituido pelo resto da lista original. */
+% Letra C - inverter
+inverte(L1, L2) :-
+    inverteLista(L1, [], L2).
 
-% USO DO PREDICADO:
-% remove(Lista, Indice, Resultado)
+inverteLista([], Acc, Acc). % Caso base: quando a lista original está vazia, a lista invertida é igual ao acumulador
+inverteLista([Cab|Cal], Acc, L2) :-
+    inverteLista(Cal, [Cab|Acc], L2). % Caso recursivo: inverte a cauda e adiciona a cabeça no acumulador
 
-remove([_|Cauda], 1, Cauda).    % O caso base ocorre quando o indice a ser removido eh igual a 1 (cabeca da lista), recebendo uma lista e retornando sua Cauda
-remove([Cabeca|Cauda], Posicao, [Cabeca|Resto]) :-      % O predicado recebe a Posicao a ser removida, a lista e conserva a Cabeca utilizando a Cauda nas chamadas recursivas
-    NovaPosicao is Posicao - 1,     % Descresce o a Posicao em 1 unidade em toda repeticao, atribuindo o valor para a variavel NovaPosicao
-    remove(Cauda, NovaPosicao, Resto).      % Percorre a lista recursivamente usando a Cauda ate que a NovaPosicao para inserir o elemento seja o primeiro (cabeca)
+% Letra D - tamanho
+tamanho([], 0). % Caso base: lista vazia tem tamanho 0
 
+tamanho([_|Resto], Tamanho) :-
+  tamanho(Resto, TamanhoResto), % Calcula o tamanho do restante da lista
+  Tamanho is TamanhoResto + 1. % Incrementa o tamanho pelo restante da lista
 
-%Letra C
-
-/* Para inverter uma lista eh necessario inserir o elemento cabeca de uma lista em outra recursivamente ate
-que a primeira lista esteja vazia e a segunda completa. O metodo de concatenar serve para inserir os elementos
-na lista final, tornando o predicado "inverte" mais simples de ser construido. */
-
-% USO DO PREDICADO:
-% inverte(Lista, Resultado)
-
-concatena([], Elemento, Elemento).    % Caso base da recursao, um Elemento inserido numa lista vazia eh o proprio Elemento
-concatena([Cabeca|Lista1], Lista2, [Cabeca|Lista3]) :-    % Recursivamente junta a Cabeca com a Cauda, formando a Lista3 com os elementos da Lista1 e da Lista2
-    concatena(Lista1, Lista2, Lista3).
-
-inverte([], []).    % Caso base da recursao, o inverso de uma lista vazia eh ela mesma
-inverte([Cabeca|Resto], ListaInversa) :-      % Separa a Cabeca do Resto para usar nas chamadas recursivas
-    inverte(Resto, Lista),     % Recursivamente usa o Resto para realizar novamente o predicado
-    concatena(Lista, [Cabeca], ListaInversa).    % Insere a Cabeca na Lista formando a ListaInversa ate que o ultimo elemento seja o primeiro
-
-
-
-
-
-%Letra D
-
-
-
-
-%Letra E
-soma(0,0).
-soma(X,Y):- X1 is X-1, soma(X1,Y1),Y is Y1 + X.
+% Letra E - soma
+soma([], 0). % Caso base: a soma de uma lista vazia é 0
+soma([Cab|Cal], X) :-
+    soma(Cal, X1), X is X1 + Cab. % Caso recursivo: soma o elemento atual com a soma dos elementos restantes
