@@ -1,3 +1,5 @@
+% Parte 1
+
 % Letra A - adicionar
 adicionaNoFinal(X, [], [X]). % Caso base: se a lista é vazia, L2 será [X]
 adicionaNoFinal(X, [Cab|Cau], [Cab|L2]) :-
@@ -27,3 +29,111 @@ tamanho([_|Resto], Tamanho) :-
 soma([], 0). % Caso base: a soma de uma lista vazia é 0
 soma([Cab|Cal], X) :-
     soma(Cal, X1), X is X1 + Cab. % Caso recursivo: soma o elemento atual com a soma dos elementos restantes
+
+% Testes e Compilações
+?- adicionaNoFinal(4, [1, 2, 3], L2).
+?- remover(2, [1, 2, 3, 4], L2).
+?- inverte([1, 2, 3, 4], L2).
+?- Tamanho([1, 2, 3, 4], Tamanho).
+?- soma([1, 2, 3, 4], Soma).
+
+
+
+
+% Parte 2
+
+% Definição dos fatos
+tecnico(rogerio).
+tecnico(ivone).
+
+engenheiro(daniel).
+engenheiro(isabel).
+engenheiro(oscar).
+engenheiro(tomas).
+engenheiro(ana).
+
+supervisor(luis).
+supervisor(sonia).
+
+supervisor_chefe(sonia).
+
+secretaria_executiva(laura).
+
+diretor(santiago).
+
+% Definição das regras
+chefe(X, Y) :- engenheiro(X), tecnico(Y).
+chefe(X, Y) :- supervisor(X), engenheiro(Y).
+chefe(X, Y) :- supervisor(X), tecnico(Y).
+chefe(X, Y) :- supervisor_chefe(X), supervisor(Y).
+chefe(diretor, Y) :- supervisor_chefe(Y).
+chefe(diretor, laura).
+
+% Testes e Compilações
+
+% Letra A
+
+?- chefe(X, Y), tecnico(Y).
+
+X = daniel,
+Y = rogerio ;
+X = daniel,
+Y = ivone ;
+X = isabel,
+Y = rogerio ;
+X = isabel,
+Y = ivone ;
+X = oscar,
+Y = rogerio ;
+X = oscar,
+Y = ivone ;
+X = tomas,
+Y = rogerio ;
+X = tomas,
+Y = ivone ;
+X = ana,
+Y = rogerio ;
+X = ana,
+Y = ivone ;
+X = luis,
+Y = rogerio ;
+X = luis,
+Y = ivone ;
+X = sonia,
+Y = rogerio ;
+X = sonia,
+Y = ivone ;
+false.
+
+
+% Letra B
+
+?- chefe(X, ivone), engenheiro(X).
+X = daniel ;
+X = isabel ;
+X = oscar ;
+X = tomas ;
+X = ana ;
+false.
+
+?- chefe(X, ivone), supervisor(X).
+
+X = luis ;
+X = sonia ;
+false.
+
+?- chefe(X, ivone), supervisor_chefe(X).
+
+X = sonia ;
+false.
+
+?- chefe(X, ivone), secretaria_executiva(X).
+
+false.
+
+?- chefe(X, ivone), diretor(X).
+
+false.
+
+
+% Letra C
