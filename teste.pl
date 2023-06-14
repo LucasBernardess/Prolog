@@ -1,4 +1,4 @@
- 1
+% Parte 1
 
 % Letra A - adicionar
 adicionaNoFinal(X, [], [X]). % Caso base: se a lista é vazia, L2 será [X]
@@ -31,11 +31,12 @@ soma([Cab|Cal], X) :-
     soma(Cal, X1), X is X1 + Cab. % Caso recursivo: soma o elemento atual com a soma dos elementos restantes
 
 % Testes e Compilações
-% ?- adicionaNoFinal(4, [1, 2, 3], L2).
-% ?- remover(2, [1, 2, 3, 4], L2).
-% ?- inverte([1, 2, 3, 4], L2).
-% ?- Tamanho([1, 2, 3, 4], Tamanho).
-% ?- soma([1, 2, 3, 4], Soma).
+?- adicionaNoFinal(4, [1, 2, 3], L2).
+?- remover(2, [1, 2, 3, 4], L2).
+?- inverte([1, 2, 3, 4], L2).
+?- Tamanho([1, 2, 3, 4], Tamanho).
+?- soma([1, 2, 3, 4], Soma).
+
 
 
 
@@ -52,7 +53,6 @@ engenheiro(tomas).
 engenheiro(ana).
 
 supervisor(luis).
-supervisor(sonia).
 
 supervisor_chefe(sonia).
 
@@ -69,22 +69,34 @@ chefe(diretor, Y) :- supervisor_chefe(Y).
 chefe(diretor, laura).
 
 % Letra A
+% a) Quem são os chefes dos técnicos e por quem eles são chefiados?
 %
 % Através do comando abaixo, poderemos ver quem são os chefes dos
 % técnicos
 %
-?- chefe(X, Y), tecnico(Y). % Vinte e Oitro Resultados
+?- chefe(X, Y), tecnico(Y). % Doze Resultados
 
 % Letra B
+% b) Quem é o chefe da Ivone e qual é o cargo deste chefe?
 
 ?- chefe(X, ivone), engenheiro(X). % Cinco Resultados
 
-?- chefe(X, ivone), supervisor(X). % Dois Resultados
+?- chefe(X, ivone), supervisor(X). % Um Resultado
 
-?- chefe(X, ivone), supervisor_chefe(X). % Um Resultado
+?- chefe(X, ivone), supervisor_chefe(X). % Nenhum Resultado
 
 ?- chefe(X, ivone), secretaria_executiva(X).% Nenhum Resultado
 
 ?- chefe(X, ivone), diretor(X). % Nenhum Resultado
 
 % Letra C
+% c) Quem são as pessoas chefiados pelo supervisor chefe ou pelo supervisor?
+
+?- chefe(X, Y), supervisor_chefe(X). % Um Resultado
+
+?- chefe(X, Y), supervisor(X). % Sete Resultados
+
+% Letra D
+% d) Sabendo que Carolina não é chefiada pelo diretor, qual é o seu cargo?
+
+?-  chefe(santiago, Carolina).
