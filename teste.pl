@@ -1,5 +1,5 @@
 % Integrantes :
-% Davi Greco
+% Davi Greco Rezende Freitas
 % Lucas Eduardo Bernardes de Paula
 % Messias Feres Curi Melo
 
