@@ -1,6 +1,6 @@
 # Estrutura do Repositório - Trabalho em Prolog
 
-Este repositório contém o código-fonte em Prolog e um trabalho em grupo desenvolvido como parte de trabalho prático da disciplina de Lógica aplicada a computação da UFSJ 2023/1.
+Este repositório contém o código-fonte em Prolog de um trabalho em grupo desenvolvido para a disciplina de Lógica aplicada a computação da UFSJ 2023/1.
 
 O objetivo do trabalho é resolver questões relacionadas à manipulação de listas e à representação de uma estrutura hierárquica de uma empresa.
 
